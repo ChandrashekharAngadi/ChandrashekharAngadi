@@ -1,0 +1,79 @@
+<div class="view on" id="view-home">
+  <!-- DASHBOARD HEADER per spec -->
+  <div class="dash-header">
+    <div class="dash-logo">🌿</div>
+    <div>
+      <div class="dash-title">Continuum Green Energy</div>
+      <div class="dash-sub">SWPPL 140 MW hybrid (Solar + Wind) Project – Dashboard</div>
+    </div>
+  </div>
+
+  <!-- CIRCULAR KPI CARDS per spec: Overall, Land only, Solar only, WTG only, BOP only, Manpower, ROW -->
+  <div class="circ-kr" id="home-circ-kr"></div>
+
+  <!-- MODULE CARDS -->
+  <div class="mcg">
+    <div class="mc mcsol" onclick="nav('solar')"><div class="mc-em">☀️</div><div class="mc-nm">Solar</div><div class="mc-cp">6 ITCs | 70.4 MW total</div><div class="mc-pct" id="mc-sol" style="color:var(--sol)">—</div><div class="mc-bw"><div class="mc-bf" id="bar-sol" style="width:0%;background:linear-gradient(90deg,var(--sol2),var(--sol))"></div></div><div class="mc-ft"><span class="chip cy" id="chip-sol">⏳ WIP</span><span id="sub-sol" style="font-size:8px;color:var(--t3)">6 ITCs</span></div></div>
+    <div class="mc mcwtg" onclick="nav('wtg')"><div class="mc-em">🌬️</div><div class="mc-nm">WTG</div><div class="mc-cp">26 × 2.7MW = 70.2MW</div><div class="mc-pct" id="mc-wtg" style="color:var(--wtg)">—</div><div class="mc-bw"><div class="mc-bf" id="bar-wtg" style="width:0%;background:linear-gradient(90deg,var(--wtg2),var(--wtg))"></div></div><div class="mc-ft"><span class="chip cy" id="chip-wtg">⏳ WIP</span><span id="sub-wtg" style="font-size:8px;color:var(--t3)">26 Turbines</span></div></div>
+    <div class="mc mcland" onclick="nav('land')"><div class="mc-em">🌍</div><div class="mc-nm">Land</div><div class="mc-cp">Solar + WTG Land</div><div class="mc-pct" id="mc-land" style="color:var(--land)">—</div><div class="mc-bw"><div class="mc-bf" id="bar-land" style="width:0%;background:linear-gradient(90deg,var(--land2),var(--land))"></div></div><div class="mc-ft"><span class="chip cy">⏳ WIP</span><span style="font-size:8px;color:var(--t3)">2 sub-sections</span></div></div>
+    <div class="mc mcbop" onclick="nav('bop')"><div class="mc-em">⚙️</div><div class="mc-nm">BOP</div><div class="mc-cp">33kV|66kV|PSS|GSS</div><div class="mc-pct" id="mc-bop" style="color:var(--bop)">—</div><div class="mc-bw"><div class="mc-bf" id="bar-bop" style="width:0%;background:linear-gradient(90deg,var(--bop2),var(--bop))"></div></div><div class="mc-ft"><span class="chip cr">⚠️ Early</span><span style="font-size:8px;color:var(--t3)">4 sections</span></div></div>
+    <div class="mc mcpod" onclick="nav('pod')"><div class="mc-em">📋</div><div class="mc-nm">POD Entry</div><div class="mc-cp">Daily Plan & Progress</div><div class="mc-pct" id="mc-pod" style="color:var(--pod)">0</div><div class="mc-bw"><div class="mc-bf" style="width:100%;background:linear-gradient(90deg,var(--pod2),var(--pod))"></div></div><div class="mc-ft"><span class="chip" style="background:rgba(233,30,99,.14);color:var(--pod);">Planning</span></div></div>
+  </div>
+
+  <!-- LOWER SECTION: LEFT = POD/progress/manpower/ROW | RIGHT = Graph -->
+  <div class="g2" style="margin-bottom:12px;">
+    <!-- LEFT: POD + daily progress + manpower + ROW -->
+    <div>
+      <div class="pnl" style="margin-bottom:11px;">
+        <div class="ph2"><div class="pt">📋 POD & Daily Progress</div><button class="btn bts bta" onclick="nav('pod')">View All →</button></div>
+        <div id="home-pod-summary"></div>
+      </div>
+      <div class="pnl" style="margin-bottom:11px;">
+        <div class="ph2"><div class="pt">👷 Manpower Today</div><button class="btn bts" onclick="nav('manpower')">Manage →</button></div>
+        <div id="home-mp-summary"></div>
+      </div>
+      <div class="pnl">
+        <div class="ph2">
+          <div class="pt">🚧 ROW Issues Tracker</div>
+          <span id="row-count" class="pb cr">0 Open</span>
+        </div>
+        <div class="tsc"><table class="tbl" id="row-tbl"></table></div>
+      </div>
+    </div>
+    <!-- RIGHT: Planned vs Actual vs Forecast graph -->
+    <div>
+      <div class="pnl" style="margin-bottom:11px;">
+        <div class="ph2"><div class="pt">📈 Planned vs Actual vs Forecast Progress</div><span style="font-size:8px;color:var(--t3);">Monthly cumulative % | Jan 2026 – May 2027</span></div>
+        <div class="ch h320"><canvas id="ch-pva"></canvas></div>
+      </div>
+      <div class="g2">
+        <div class="pnl"><div class="ph2"><div class="pt">📊 Solar ITCs — C/WIP/Rem</div></div><div class="ch h200"><canvas id="ch-sol-cwip"></canvas></div></div>
+        <div class="pnl"><div class="ph2"><div class="pt">📊 WTG Foundation Progress</div></div><div class="ch h200"><canvas id="ch-wtg-cwip"></canvas></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g2">
+    <div class="pnl"><div class="ph2"><div class="pt">🥧 Module Distribution</div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;">
+        <div style="text-align:center;"><div style="font-size:8px;color:var(--t3);margin-bottom:2px;">Overall</div><div class="ch h120"><canvas id="pie-ov"></canvas></div></div>
+        <div style="text-align:center;"><div style="font-size:8px;color:var(--t3);margin-bottom:2px;">Solar</div><div class="ch h120"><canvas id="pie-sol"></canvas></div></div>
+        <div style="text-align:center;"><div style="font-size:8px;color:var(--t3);margin-bottom:2px;">WTG</div><div class="ch h120"><canvas id="pie-wtg"></canvas></div></div>
+        <div style="text-align:center;"><div style="font-size:8px;color:var(--t3);margin-bottom:2px;">Land</div><div class="ch h120"><canvas id="pie-land"></canvas></div></div>
+        <div style="text-align:center;"><div style="font-size:8px;color:var(--t3);margin-bottom:2px;">BOP</div><div class="ch h120"><canvas id="pie-bop"></canvas></div></div>
+        <div style="text-align:center;"><div style="font-size:8px;color:var(--t3);margin-bottom:2px;">Today</div><div class="ch h120"><canvas id="pie-td"></canvas></div></div>
+      </div>
+    </div>
+    <div class="pnl"><div class="ph2"><div class="pt">📅 Schedule & Blockers</div></div>
+      <div class="al al-d">🚨 <div><b>MKD-258 / MKD-52:</b> ROW On Hold</div></div>
+      <div class="al al-w">⚠️ <div><b>CEIG:</b> Not Ready – Solar T&C blocked</div></div>
+      <div class="al al-i">ℹ️ <div><b>MKD-211:</b> GSB supply started; dewatering done</div></div>
+      <div class="tl" style="margin-top:8px;">
+        <div class="tli tdn"><div class="tdt">17-Mar-2026</div><div class="ttx"><b>CDP-221</b> Cast & Cured ✅</div></div>
+        <div class="tli tnx"><div class="tdt">03-Apr ← TOMORROW</div><div class="ttx"><b>MOB-142</b> Ready for Casting 🔨</div></div>
+        <div class="tli tpd"><div class="tdt">05-Apr</div><div class="ttx"><b>KDK-462</b> Ready</div></div>
+        <div class="tli tpd"><div class="tdt">25-Apr 🎯</div><div class="ttx"><b>Solar ITC-1 Commissioning</b></div></div>
+      </div>
+    </div>
+  </div>
+</div>

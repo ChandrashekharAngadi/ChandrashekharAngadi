@@ -1,0 +1,12 @@
+<div class="view" id="view-pod">
+  <div class="bk" onclick="nav('home')">← Dashboard</div>
+  <div class="ph"><div class="pht" style="color:var(--pod)">📋 POD – Plan of Day & Daily Entry</div><div class="phs">POD = Planned work (no login) | Today's Progress = Actual work (login required)</div></div>
+  <div class="al al-i" style="margin-bottom:11px;">ℹ️ POD submitted daily. Today's Progress updates live calculations.</div>
+  <div class="stabs">
+    <div class="stb on-s" id="ptb-s" onclick="podTab('s')">☀️ Solar</div>
+    <div class="stb" id="ptb-w" onclick="podTab('w')">🌬️ WTG</div>
+    <div class="stb" id="ptb-l" onclick="podTab('l')">🌍 Land</div>
+    <div class="stb" id="ptb-b" onclick="podTab('b')">⚙️ BOP</div>
+  </div>
+  <div id="pod-ct"></div>
+</div>
